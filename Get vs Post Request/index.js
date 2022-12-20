@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { v4: uuid } = require('uuid');
+const methodOverride = require('method-override')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method'))
 
 //-----------------------------------------------------------//
-
 const comments = [
     {
         id: uuid(),
@@ -46,21 +47,17 @@ app.get('/comments/:id', (req, res) => {
     const comment = comments.find(i => i.id === id);
     res.render('show', { comment });
 })
+app.get('/comments/:id/edit', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(i => i.id === id);
+    res.render('edit', { comment })
+})
 app.patch('/comments/:id', (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const newCommentText = req.body.comment;
     const foundComment = comments.find(i => i.id === id);
     foundComment = newCommentText;
-    res.redirect('/comments'); 
-})
-
-
-app.get('/tacos', (req, res) => {
-    res.send("GET /tacos response");
-})
-app.post('/tacos', (req, res) => {
-    const { meat, qty } = req.body;
-    res.send(`Ok, Here are your ${qty} ${meat} you Ordered!`);
+    res.redirect('/comments');
 })
 app.listen(3000, () => {
     console.log('On Port 3000!');
