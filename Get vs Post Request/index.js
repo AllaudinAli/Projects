@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'))
 
 //-----------------------------------------------------------//
-const comments = [
+let comments = [
     {
         id: uuid(),
         username: 'Todd',
@@ -27,7 +27,6 @@ const comments = [
         comment: 'How do you spell nessecory'
     }
 ]
-
 app.get('/', (req, res) => {
     res.send('Home Page!')
 })
@@ -58,6 +57,11 @@ app.patch('/comments/:id', (req, res) => {
     const foundComment = comments.find(i => i.id === id);
     foundComment = newCommentText;
     res.redirect('/comments');
+})
+app.delete('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    comments = comments.filter(i => i.id !== id);
+    res.redirect('/comments')
 })
 app.listen(3000, () => {
     console.log('On Port 3000!');
