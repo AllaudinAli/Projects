@@ -38,16 +38,40 @@ const productSchema = new mongoose.Schema({
         enum: ['S', 'M', 'L', 'XL']
     }
 })
-
+//Creating methods
+productSchema.methods.greet = function () {
+    console.log("Hello! Looking for me?")
+    console.log(`- from ${this.name}`)
+}
+productSchema.methods.toggleOnSale = function() {
+    this.onSale = !this.onSale;
+    return this.save()
+}
+productSchema.methods.addCategory = function(newCat) {
+    this.categories.push(newCat);
+    return this.save();
+}
 const Product = mongoose.model('Product', productSchema);
-const bike = new Product({ name: 'BMX Jersey', price: 349.99, categories: ['Cycling'], size: 'L'})
-bike.save().then(data => {
-    console.log("It Worked!")
-    console.log(data)
-}).catch(err => {
-    console.log('Oh no Error!')
-    console.log(err.errors.name.properties.message);
-})
+
+const findProduct = async () => {
+    const foundProduct = await Product.findOne({ name: 'Tire Pump' });
+    console.log(foundProduct)
+    await foundProduct.toggleOnSale();
+    await foundProduct.addCategory('Service')
+    console.log(foundProduct)
+}
+
+findProduct();
+
+
+// const bike = new Product({ name: 'BMX Jersey', price: 349.99, categories: ['Cycling'], size: 'L'})
+// bike.save().then(data => {
+//     console.log("It Worked!")
+//     console.log(data)
+// }).catch(err => {
+//     console.log('Oh no Error!')
+//     console.log(err.errors.name.properties.message);
+// })
 
 // Product.findOneAndUpdate({ name: 'Tire Pump' }, { price: 2.99 }, { new: true, runValidators: true })
 //     .then(data => {
