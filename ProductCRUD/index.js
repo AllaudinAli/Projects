@@ -4,7 +4,6 @@ const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-
 const Product = require('./models/products');
 
 mongoose.connect('mongodb://0.0.0.0:27017/farmStand', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -31,8 +30,6 @@ app.get('/products', async (req, res) => {
         const products = await Product.find({})
         res.render('products/index', { products, category: 'All' })
     }
-    
-    
 })
 //Adding Products
 app.get('/products/new', (req, res) => {
