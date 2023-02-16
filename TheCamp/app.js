@@ -23,8 +23,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
-
-
+//----------------------------------------------------------------------------------
 
 //Web Page
 app.get('/', (req, res) => {
@@ -72,7 +71,7 @@ app.delete('/campgrounds/:id', async (req, res) => {
 
 
 
-
+//----------------------------------------------------------------------------------
 
 app.listen(3000, () => {
     console.log('Serving Port 3000')
