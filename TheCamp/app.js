@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 const methodOverride = require('method-override');
-const { readdir } = require('fs');
+const ejsMate = require('ejs-mate');
 //Mongoose Connection
 mongoose.set('strictQuery', false);
 mongoose.connect('mongodb://0.0.0.0:27017/the-camp', {
@@ -18,11 +18,11 @@ db.once("open", () => {
 });
 
 //Ejs Setup
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
-
 //----------------------------------------------------------------------------------
 
 //Web Page
