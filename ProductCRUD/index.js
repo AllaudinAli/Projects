@@ -5,7 +5,7 @@ const methodOverride = require('method-override');
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 const Product = require('./models/products');
-
+const AppError = require('./AppError');
 mongoose.connect('mongodb://0.0.0.0:27017/farmStand', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECTED!")
@@ -22,11 +22,11 @@ const categories = ['fruit', 'vegetable', 'dairy'];
 //Index
 app.get('/products', async (req, res) => {
     const { category } = req.query;
-    if(category){
-        const products = await Product.find({category})
+    if (category) {
+        const products = await Product.find({ category })
         res.render('products/index', { products, category })
     }
-    else{
+    else {
         const products = await Product.find({})
         res.render('products/index', { products, category: 'All' })
     }
@@ -41,15 +41,21 @@ app.post('/products', async (req, res) => {
     res.redirect(`/products/${newProduct._id}`)
 })
 //Viewing Products
-app.get('/products/:id', async (req, res) => {
+app.get('/products/:id', async (req, res, next) => {
     const { id } = req.params;
     const product = await Product.findById(id);
+    if (!product) {
+        return next(new AppError('Product not found!', 404));
+    }
     res.render('products/show', { product })
 })
 //Updating Products
-app.get('/products/:id/edit', async (req, res) => {
+app.get('/products/:id/edit', async (req, res, next) => {
     const { id } = req.params;
     const product = await Product.findById(id);
+    if (!product) {
+        return next(new AppError('Product not found!', 404));
+    }
     res.render('products/edit', { product, categories })
 })
 app.put('/products/:id', async (req, res) => {
@@ -63,6 +69,14 @@ app.delete('/products/:id', async (req, res) => {
     const deletedProduct = await Product.findByIdAndDelete(id);
     res.redirect('/products');
 })
+//Error Handling
+app.use((err, req, res, next) => {
+    const { status = 500, message = 'Something went Wrong!' } = err;
+    res.status(status).send(message);
+})
+
+
+
 app.listen(3000, () => {
     console.log("CONNECTED TO PORT 3000!")
 })
