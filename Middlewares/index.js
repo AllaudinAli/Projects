@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const AppError = require('./AppError');
 
 app.use(morgan('tiny'));
 app.use((req, res, next) => {
@@ -17,7 +18,7 @@ const verifyPassword = (req, res, next) => {
     if (password === 'chicken') {
         next();
     }
-    throw new Error('Password Required!')
+    throw new AppError('Password Required!', 401)
 }
 app.get('/', (req, res) => {
     console.log(`Request Date: " ${req.requestTime}`)
@@ -33,8 +34,17 @@ app.get('/dogs', (req, res) => {
 app.get('/secret', verifyPassword, (req, res) => {
     res.send('My Secret!')
 })
+
+app.use((err, req, res, next) => {
+    const { status = 500, message = 'Something Went Wrong' } = err;
+    res.status(status).send(message)
+})
+
+
+
+
 app.use((req, res) => {
-    res.status(404).send('Not Found! =')
+    res.status(404).send('Not Found!')
 })
 app.listen(3000, () => {
     console.log("Listening of Port 3000")
