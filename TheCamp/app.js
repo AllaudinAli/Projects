@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+
+
 //Mongoose Connection
 mongoose.set('strictQuery', false);
 mongoose.connect('mongodb://0.0.0.0:27017/the-camp', {
