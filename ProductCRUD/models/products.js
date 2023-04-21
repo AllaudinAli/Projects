@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-const productSchema = new mongoose.Schema({
+const {Schema} = mongoose;
+const productSchema = new Schema({
     name: {
         type: String,
         require: true
@@ -13,6 +13,10 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         emun: ['fruit', 'vegetable', 'dairy']
+    },
+    farm: {
+        type: Schema.Types.ObjectId,
+        ref: 'Farm'
     }
 })
 
