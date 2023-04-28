@@ -86,7 +86,7 @@ app.post('/products', async (req, res) => {
 //Viewing Products
 app.get('/products/:id', async (req, res, next) => {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate('farm', 'name');
     if (!product) {
         return next(new AppError('Product not found!', 404));
     }

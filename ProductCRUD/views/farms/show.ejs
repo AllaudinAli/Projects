@@ -24,13 +24,13 @@
     <ul>
         <% for(let i of farm.products) {%>
             <li>
-                <%= i.name %>
+                <a href="/products/<%= i._id %>"><%= i.name %></a>
             </li>
             <% } %>
     </ul>
 
     <button><a style="text-decoration: none;" href="/farms/<%= farm._id %>/products/new">Add Products</a></buttonn>
-        <button><a style="text-decoration: none;" href="/farms">Go Back</a></button>
+    <button><a style="text-decoration: none;" href="/farms">Go Back</a></button>
 </body>
 
 </html>
