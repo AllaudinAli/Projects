@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= farm.name %>
+    </title>
+</head>
+
+<body>
+    <h1>
+        <%= farm.name %>
+    </h1>
+    <ul>
+        <li>City: <%= farm.city %>
+        </li>
+        <li>Email: <%= farm.email %>
+        </li>
+        <button><a style="text-decoration: none;" href="/farms/<%= farm._id %>/products/new">Add Products</a></buttonn>
+        <button><a style="text-decoration: none;" href="/farms">Go Back</a></button>
+</body>
+
+</html>

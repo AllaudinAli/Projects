@@ -12,6 +12,7 @@ const productSchema = new Schema({
     },
     category: {
         type: String,
+        lowercase: true,
         emun: ['fruit', 'vegetable', 'dairy']
     },
     farm: {
