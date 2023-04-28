@@ -21,9 +21,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 //Farm Routes
-app.get('/farms', async (req, res)=>{
+app.get('/farms', async (req, res) => {
     const farms = await Farm.find({});
-    res.render('farms/index', {farms})
+    res.render('farms/index', { farms })
+})
+
+app.get('/farms/:id', async (req, res){
+    const farm = await Farm.findById(req.params.id);
+    res.render('farms/show', { farm })
 })
 
 app.get('/farms/new', (req, res) => {
@@ -35,12 +40,6 @@ app.post('/farms', async (req, res) => {
     await farm.save();
     res.redirect('/farms')
 })
-
-
-
-
-
-
 
 //Products Routes
 const categories = ['fruit', 'vegetable', 'dairy'];
