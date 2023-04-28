@@ -30,7 +30,7 @@ app.get('/farms/new', (req, res) => {
     res.render('farms/new')
 })
 app.get('/farms/:id', async (req, res) => {
-    const farm = await Farm.findById(req.params.id);
+    const farm = await Farm.findById(req.params.id).populate('products');
     res.render('farms/show', { farm })
 })
 app.post('/farms', async (req, res) => {

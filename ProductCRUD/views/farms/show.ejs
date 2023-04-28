@@ -19,7 +19,17 @@
         </li>
         <li>Email: <%= farm.email %>
         </li>
-        <button><a style="text-decoration: none;" href="/farms/<%= farm._id %>/products/new">Add Products</a></buttonn>
+    </ul>
+    <h2>Products</h2>
+    <ul>
+        <% for(let i of farm.products) {%>
+            <li>
+                <%= i.name %>
+            </li>
+            <% } %>
+    </ul>
+
+    <button><a style="text-decoration: none;" href="/farms/<%= farm._id %>/products/new">Add Products</a></buttonn>
         <button><a style="text-decoration: none;" href="/farms">Go Back</a></button>
 </body>
 
