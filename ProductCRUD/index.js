@@ -26,9 +26,11 @@ app.get('/farms', async (req, res) => {
     const farms = await Farm.find({});
     res.render('farms/index', { farms })
 })
+// New
 app.get('/farms/new', (req, res) => {
     res.render('farms/new')
 })
+// Show
 app.get('/farms/:id', async (req, res) => {
     const farm = await Farm.findById(req.params.id).populate('products');
     res.render('farms/show', { farm })
@@ -54,10 +56,10 @@ app.post('/farms/:id/products', async (req, res) => {
     await product.save();
     res.redirect(`/farms/${farm._id}`)
 })
-
-
-
-
+app.delete('/farms/:id', async (req, res) => {
+    const farm = await Farm.findByIdAndDelete(req.params.id);
+    res.redirect('/farms');
+})
 
 
 //Products Routes
@@ -74,6 +76,9 @@ app.get('/products', async (req, res) => {
         res.render('products/index', { products, category: 'All' })
     }
 })
+
+
+
 //Adding Products
 app.get('/products/new', (req, res) => {
     res.render('products/new', { categories })
@@ -83,6 +88,8 @@ app.post('/products', async (req, res) => {
     await newProduct.save();
     res.redirect(`/products/${newProduct._id}`)
 })
+
+
 //Viewing Products
 app.get('/products/:id', async (req, res, next) => {
     const { id } = req.params;
@@ -92,6 +99,8 @@ app.get('/products/:id', async (req, res, next) => {
     }
     res.render('products/show', { product })
 })
+
+
 //Updating Products
 app.get('/products/:id/edit', async (req, res, next) => {
     const { id } = req.params;
@@ -106,18 +115,21 @@ app.put('/products/:id', async (req, res) => {
     const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
     res.redirect(`/products/${product._id}`)
 })
+
+
 //Deleting Product
 app.delete('/products/:id', async (req, res) => {
     const { id } = req.params;
     const deletedProduct = await Product.findByIdAndDelete(id);
     res.redirect('/products');
 })
+
+
 //Error Handling
 app.use((err, req, res, next) => {
     const { status = 500, message = 'Something went Wrong!' } = err;
     res.status(status).send(message);
 })
-
 
 
 app.listen(3000, () => {
