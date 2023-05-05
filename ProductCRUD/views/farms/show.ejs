@@ -24,14 +24,16 @@
     <ul>
         <% for(let i of farm.products) {%>
             <li>
-                <a href="/products/<%= i._id %>"><%= i.name %></a>
+                <a href="/products/<%= i._id %>">
+                    <%= i.name %>
+                </a>
             </li>
             <% } %>
     </ul>
 
     <button><a style="text-decoration: none;" href="/farms/<%= farm._id %>/products/new">Add Products</a></buttonn>
-    <button><a style="text-decoration: none;" href="/farms">Go Back</a></button>
-    <form action="/farms/<%= farm._id %>?_method=DELETE" method="POST"><button>Delete</button></form>
+        <button><a style="text-decoration: none;" href="/farms">Go Back</a></button>
+        <form action="/farms/<%= farm._id %>?_method=DELETE" method="POST"><button>Delete</button></form>
 </body>
 
 </html>
