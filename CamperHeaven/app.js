@@ -51,11 +51,7 @@ const sessionConfig = {
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session(sessionConfig))
 app.use(flash());
-app.use((req, res, next) => {
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    next();
-})
+
 //Authentication
 app.use(passport.initialize());
 app.use(passport.session());
@@ -63,6 +59,12 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 //----------------------------------------------------------------------------------
 
 const ValidationCampground = (req, res, next) => {
@@ -94,7 +96,6 @@ const validateReview = (req, res, next) => {
 app.use('/', userRouters)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
-
 
 
 //Errors
