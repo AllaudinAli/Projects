@@ -7,11 +7,13 @@ const session = require('express-session');
 const flash = require('connect-flash')
 const mongoose = require('mongoose');
 const ExpressError = require('./utils/ExpressError');
+const passport = require('passport');
+const localStrategy = require('passport-local')
 
 
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
-
+const User = require('./models/user');
 
 //Mongoose Connection
 mongoose.set('strictQuery', false);
@@ -33,6 +35,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 
+
 const sessionConfig = {
     secret: 'UnusualSecret',
     resave: false,
@@ -52,6 +55,12 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 })
+//Authentication
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //----------------------------------------------------------------------------------
 
