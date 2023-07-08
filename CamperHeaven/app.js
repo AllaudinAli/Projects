@@ -9,11 +9,12 @@ const mongoose = require('mongoose');
 const ExpressError = require('./utils/ExpressError');
 const passport = require('passport');
 const localStrategy = require('passport-local')
-
-
-const campgrounds = require('./routes/campgrounds');
-const reviews = require('./routes/reviews');
 const User = require('./models/user');
+
+//Routes
+const campgroundRoutes = require('./routes/campgrounds');
+const reviewRoutes = require('./routes/reviews');
+const userRouters = require('./routes/users');
 
 //Mongoose Connection
 mongoose.set('strictQuery', false);
@@ -90,8 +91,9 @@ const validateReview = (req, res, next) => {
 //----------------------------------------------------------------------------------
 //Web Page
 
-app.use('/campgrounds', campgrounds)
-app.use('/campgrounds/:id/reviews', reviews)
+app.use('/', userRouters)
+app.use('/campgrounds', campgroundRoutes)
+app.use('/campgrounds/:id/reviews', reviewRoutes)
 
 
 
