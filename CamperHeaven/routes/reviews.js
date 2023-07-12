@@ -15,13 +15,6 @@ const { validateReview, isLoggedIn, isReviewAuthor } = require('../middleware');
 router.post('/', isLoggedIn, validateReview, catchAsync(reviews.createReview))
 
 //Deleting Reviews
-router.delete('/:reviewId', isLoggedIn, isReviewAuthor, catchAsync(async (req, res) => {
-
-    const { id, reviewId } = req.params;
-    await Campground.findByIdAndUpdate(id, { $pull: { review: reviewId } })
-    await Review.findByIdAndDelete(req.params.reviewId);
-    req.flash('success', 'Successfully deleted review!')
-    res.redirect(`/campgrounds/${id}`);
-}))
+router.delete('/:reviewId', isLoggedIn, isReviewAuthor, catchAsync(reviews.deleteReview))
 
 module.exports = router;
