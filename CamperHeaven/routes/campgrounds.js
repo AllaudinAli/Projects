@@ -11,8 +11,7 @@ const { isLoggedIn, isAuthor, validationCampground } = require('../middleware')
 
 router.route('/')
     .get(catchAsync(campgrounds.index))
-    .post(isLoggedIn, validationCampground, catchAsync(campgrounds.createCampground))
-
+    .post(isLoggedIn, upload.array('image'), validationCampground, catchAsync(campgrounds.createCampground))
 
 //Creating and Posting New Campgrounds
 router.get('/new', isLoggedIn, campgrounds.renderNewForm)
