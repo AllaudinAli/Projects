@@ -3,7 +3,7 @@
         <h1 class="text-center">Edit Campground</h1>
         <div class="col-6 offset-3">
             <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate
-                class="validated-form">
+                class="validated-form" enctype="multipart/form-data">
                 <!-- Title -->
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
@@ -17,19 +17,15 @@
                 <div class="mb-3">
                     <label class="form-label" for="location">Location</label>
                     <input class="form-control" type="text" name="campground[location]" id="locaiton"
-                        value="<%= campground.location %>"required>
+                        value="<%= campground.location %>" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <!-- Image -->
                 <div class="mb-3">
-                    <label class="form-label" for="image">Image Url</label>
-                    <input class="form-control" type="text" name="campground[image]" id="image"
-                        value="<%= campground.image %>"required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                    <label class="form-label" for="image">Add Images</label>
+                    <input type="file" name="image" id="image" multiple>
                 </div>
                 <!-- Price -->
                 <div class="mb-3">
@@ -37,7 +33,8 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="price-label">Rs</span>
                         <input type="text" id="price" class="form-control" placeholder="0" aria-label="price"
-                            aria-describedby="price-label" name="campground[price]" value="<%= campground.price %>"required>
+                            aria-describedby="price-label" name="campground[price]" value="<%= campground.price %>"
+                            required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
