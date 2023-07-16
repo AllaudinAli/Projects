@@ -24,7 +24,8 @@ body {
     border-bottom-color: rgba(255,255,255,0.5);
 }
 
-.btn-secondary{
+.btn{
+    background-color: rgb(197, 91, 91);
     color: #333;
     text-shadow: none;
 }
