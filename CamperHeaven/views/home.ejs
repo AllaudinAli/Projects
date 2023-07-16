@@ -5,22 +5,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CamperHeaven</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/home.css">
 </head>
 
-<body>
-    <h1>Home YelpCamp</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, recusandae ipsam. Dolores debitis amet velit nemo
-        odio! Odio veritatis consectetur architecto modi hic fuga incidunt eligendi, rerum ipsum recusandae repudiandae.
-        Illo voluptatum, quis aut et tempore quibusdam excepturi corrupti quo vero delectus aliquid distinctio
-        dignissimos debitis, reiciendis maxime, esse nisi? Fuga nesciunt voluptates, rem inventore ab eos neque
-        doloremque in.
-        Nostrum corrupti accusamus nesciunt fugit! Minima obcaecati molestias neque. Tempora deleniti quasi nisi
-        expedita, assumenda velit odit, veniam modi placeat, quod tempore ipsa ipsum possimus vitae porro eos architecto
-        beatae.
-        Tempore, voluptate iste. Libero natus velit corporis quo blanditiis pariatur deleniti itaque corrupti
-        distinctio! Vitae ea fugit animi! Id eligendi eum repudiandae praesentium nam consectetur deleniti omnis, eius
-        pariatur itaque?</p>
+<body class="d-flex text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-left mb-0">CamperHeaven</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-right">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="/campgrounds">Campgrounds</a>
+                    <% if(!currentUser) { %>
+                        <a class="nav-link" href="/login">LogIn</a>
+                        <a class="nav-link" href="/register">SignUp</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/logout">Logout</a>
+                            <% } %>
+                </nav>
+            </div>
+        </header>
+        <main class="px-3">
+            <h1>CamperHeaven</h1>
+            <p class="lead">
+                Welcome to CamperHeaven<br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quae expedita
+                unde. Expedita beatae eveniet molestias magni, a accusantium ab sapiente, atque ipsa, ad minima est? Eos
+                dolor voluptatem cumque?
+                Suscipit, architecto! Dolor sed enim iure inventore. Ipsam, minus? Corporis eveniet repellendus quae
+                temporibus, dolorem ducimus est molestiae quas exercitationem quam? Nulla a impedit ratione corrupti
+                eaque maiores, asperiores possimus.
+                At numquam tenetur laudantium? Soluta vitae voluptatum numquam nostrum eligendi vel eum veniam quae,
+                facere corporis, labore aliquam magni eaque ad nesciunt veritatis quasi nulla ex architecto quidem esse
+                atque!
+                Perferendis, rem in consectetur molestias facilis voluptatibus. Illo in repudiandae voluptate dolor
+                dolorum alias, odio, voluptatum officia deleniti a maxime nemo, itaque cupiditate omnis eum modi autem
+                quisquam eligendi! Quas?
+            </p>
+            <a href="/campgrounds" class="btn btn-lg btn-secondary font-weight-bolder text-white">View Campgrounds</a>
+        </main>
+        <footer class="mt-auto text-white-50">
+            <p>&copy; 2023 CamperHeaven</p>
+        </footer>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+
 </body>
 
 </html>

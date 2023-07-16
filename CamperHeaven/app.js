@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
@@ -71,28 +71,6 @@ app.use((req, res, next) => {
 })
 //----------------------------------------------------------------------------------
 
-const ValidationCampground = (req, res, next) => {
-
-    const { error } = campgroundSchema.validate(req.body)
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    }
-    else {
-        next();
-    }
-}
-
-const validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    }
-    else {
-        next();
-    }
-}
 
 //----------------------------------------------------------------------------------
 //Web Page
@@ -101,6 +79,9 @@ app.use('/', userRouters)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
+app.get('/', (req, res) => {
+    res.render('home')
+})
 
 //Errors
 app.all('*', (req, res, next) => {
