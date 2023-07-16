@@ -25,15 +25,16 @@ const seedDB = async () => {
             author: '64a9894526add6083c995c51',
             location: `${cities[random1000].city},${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            geometry: { type: 'Point', coordinates: [ 74.213323, 34.719081 ] },
+            geometry: { type: 'Point', coordinates: [cities[random1000].longitude, cities[random1000].latitude] },
             images: [
                 {
-                    url: 'https://res.cloudinary.com/dvda6on2q/image/upload/v1689357088/CamperHeaven/iprsrlihaxmaqvdkae3c.jpg',
-                    filename: 'CamperHeaven/iprsrlihaxmaqvdkae3c'
+                    url: 'https://res.cloudinary.com/dvda6on2q/image/upload/v1689524196/CamperHeaven/w8nlsmyusud3jco859go.jpg',
+                    filename: 'CamperHeaven/w8nlsmyusud3jco859go'
                 },
                 {
-                    url: 'https://res.cloudinary.com/dvda6on2q/image/upload/v1689357090/CamperHeaven/phijr3pkzay4qgxc029x.jpg',
-                    filename: 'CamperHeaven/phijr3pkzay4qgxc029x'
+                    url: 'https://res.cloudinary.com/dvda6on2q/image/upload/v1689524197/CamperHeaven/xvuk8fhqw75t5uhpx9tq.jpg',
+                    filename: 'CamperHeaven/xvuk8fhqw75t5uhpx9tq'
+
                 }
             ],
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa atque, amet ullam id quas, porro dolorem dicta possimus, odio quod reiciendis. Quidem tempora libero possimus totam, nam nesciunt officiis officia.',
